@@ -1,0 +1,95 @@
+/******************************************************************************
+Title       : cambitsis_daniel_p2_header.hpp
+Author      : Dan Cambitsis
+Created on  : 11/17/2015
+Description : Header file for cambitsis_daniel_p2_imp.cpp.
+******************************************************************************/
+
+#ifndef _CAMBITSIS_DANIEL_P2_HEADER_HPP_
+#define _CAMBITSIS_DANIEL_P2_HEADER_HPP_
+
+#include <iostream>
+#include <cassert>
+#include <stdexcept> 
+#include <cstdlib>
+#include "cambitsis_daniel_p2_multistackinterface.hpp"
+
+using namespace std;
+
+class MultiStack: public MultiStackInterface {
+  private:
+    struct node { //a struct to represent each node
+      char theChar; //the character of each node
+      node* next; //pointing to the next node in the stack
+    };
+    node* top; //the top of the stack
+    int count = 0; //count that is incremented and decremented throughout the program
+  public:
+    MultiStack(); //default constructor
+    MultiStack(const MultiStack& newMultiStack);
+    /*copy constructor
+    @param: const MultiStack& newMultiStack
+    @pre: a MultiStack exists prior to the copy
+    @post: replica of original MultiStack is created
+    no return
+    */
+    MultiStack& operator=(const MultiStack& newMultiStack);
+    /*assignment operator
+    @param: const MultiStack& newMultiStack
+    @pre: a MultiStack exists prior to the assignment
+    @post: replica of original MultiStack is created 
+    return *this
+    */
+    void push(char c);
+    /*push a character onto the stack
+    @param: char c
+    @pre: c is of character type
+    @post: a new node is added onto the stack, recently pushed item is now the top
+    no return
+    */
+    char pop();
+    /*pops the top off the stack
+    @param: none
+    @pre: the stack is not empty, top is not nullptr
+    @post: pops the top of the stack off
+    return 0
+    */
+    char multiPop();
+    /*pops the top off the stack
+    @param: none
+    @pre: the stack is not empty, top is not nullptr
+    @post: sets the weight of the sequence
+    return tempStack2.top -> theChar ('a', according to our assert)
+    */
+    int getRepeatCounts();
+    /*counts all instances of repeat counts within the stack
+    @param: none
+    @pre: none (if stack is empty, it will return 0)
+    @post: returns the amount of times characters are repeated within the stack
+    return repeatCount
+    */
+    bool isEmpty() const;
+    /*checks to see if the stack is empty
+    @param: none
+    @pre: none
+    @post: returns true if stack is empty, false if not
+    return top == nullptr
+    */
+    int getSize() const;
+    /*returns the size of the stack
+    @param: none
+    @pre: count was incremented or decremented throughout the push and pop methods
+    @post: a number for count is generated
+    return count
+    */
+    int getUniqueCount();
+    /*counts all instances of the stack without repeats
+    @param: none
+    @pre: the stack isn't empty and contains characters
+    @post: a number for uniqueCount is generated
+    return uniqueCount
+    */
+    ~MultiStack(); //destructor (pops off all stack nodes if not empty)
+};
+
+#endif
