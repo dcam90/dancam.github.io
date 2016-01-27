@@ -1,0 +1,27 @@
+/******************************************************************************
+Title       : ringinterface.hpp
+Author      : Dan Cambitsis
+Created on  : 10/23/2015
+Description : Header file for abstract RingInterface.
+******************************************************************************/
+
+#ifndef _RING_INTERFACE_HPP_
+#define _RING_INTERFACE_HPP_
+
+#include "dna.hpp"
+
+class RingInterface { //an abstract class utilized by Ring
+public:
+  virtual void set(const DNA value) = 0; 
+  virtual DNA get() const = 0; 
+  virtual bool remove() = 0;
+  virtual void moveReference(int positions) = 0;
+  virtual void moveNext() = 0;
+  virtual void movePrevious() = 0;
+  virtual int getSequenceCount() const = 0;
+  virtual int getRingSize() const = 0;
+  virtual void clearRing() = 0;
+  virtual void moveToKthLargest(int k) = 0;
+};
+
+#endif
