@@ -1,0 +1,100 @@
+/******************************************************************************
+Title       : ring.hpp
+Author      : Dan Cambitsis
+Created on  : 10/23/2015
+Description : Header file for Ring (extends RingInterface.hpp).
+******************************************************************************/
+
+#ifndef _RING_HPP_
+#define _RING_HPP_
+
+#include "ringinterface.hpp"
+#include "dna.hpp"
+
+class Ring: public RingInterface { //extends the RingInterface class
+private:
+  static const int DEFAULT_RING_SIZE = 20;
+  int n;                   // this is the ring's size
+  int SequenceCount;        // number of sequences actually stored
+  DNA* sequences;             // dynamic array that holds the actual sequences
+  bool* isSequenceStored;   // dynamic array that keeps tab whether sequence is stored
+  int referenceIndex;      // index to the dynamic arrays
+  void moveToKthLargestRecursion(std::vector<DNA> a, int size, int k);
+
+public:
+  Ring(); //default constructor (not used)
+  Ring(int ringSize); //loaded constructor (used to set ringSize = 20, as seen in main)
+  void set(const DNA value); 
+  /*puts a DNA object into the Ring
+  @param: const DNA value
+  @pre: a DNA object was successfully created and it has both a sequence and a weight
+  @post: puts the DNA object into the Ring
+  no return
+  */
+  DNA get() const; 
+  /*gets a DNA object (not used)
+  @param: none
+  @pre: a DNA object was successfully created and it has both a sequence and a weight
+  @post: none
+  returns a DNA object from the DNA dynamic array called sequences
+  */
+  bool remove();
+  /*removes a DNA object from the Ring (not used)
+  @param: none
+  @pre: a DNA object was successfully created and it has both a sequence and a weight
+  @post: none
+  returns either true or false
+  */
+  void moveReference(int positions);
+  /*moves the point of reference within the Ring by x number of spots (not used)
+  @param: int positions
+  @pre: positions is an integer, Ring contains something
+  @post: moves the point of reference (ex: from position 0 to position 3 if positions = 3)
+  no return
+  */
+  void moveNext();
+  /*moves the point of reference within the Ring by one spot forward (not used)
+  @param: none
+  @pre: Ring contains something
+  @post: moves the point of reference forward by one spot (ex: from position 1 to position 2)
+  no return
+  */
+  void movePrevious();
+  /*moves the point of reference within the Ring by one spot backwards (not used)
+  @param: none
+  @pre: Ring contains something
+  @post: moves the point of reference backwards by one spot (ex: from position 2 to position 1)
+  no return
+  */
+  int getSequenceCount() const;
+  /*returns the sequence count (should be 20 in our case)
+  @param: none
+  @pre: Ring contains something
+  @post: none
+  returns the amount of sequences within the Ring
+  */
+  int getRingSize() const;
+  /*returns the Ring size (should be 20 in our case since it was initialized in main as 20)
+  @param: none
+  @pre: Ring contains something
+  @post: none
+  returns the size of the Ring
+  */
+  void clearRing();
+  /*empties the ring
+  @param: none
+  @pre: both dynamic arrays declared in constructor were filled (Ring contained something before deletion)
+  @post: the Ring is emptied
+  no return
+  */
+  void moveToKthLargest(int k); 
+  /*moves the point of reference to the kth largest sequence (in our case 5th, 10th, and 15th)
+  @param: int k
+  @pre: Ring contains something, k is an integer
+  @post: the point of reference is moved to the inputted k value
+  no return
+  */
+  ~Ring(); //deconstructor, deletes the dynamic arrays declared in constructor
+};
+
+#endif
