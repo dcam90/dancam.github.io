@@ -1,0 +1,22 @@
+/******************************************************************************
+Title       : cambitsis_daniel_p2_multistackinterface.hpp
+Author      : Dan Cambitsis
+Created on  : 11/17/2015
+Description : Interface for the MultiStack.
+******************************************************************************/
+
+#ifndef _CAMBITSIS_DANIEL_P2_INTERFACE_HPP
+#define _CAMBITSIS_DANIEL_P2_INTERFACE_HPP
+
+class MultiStackInterface {
+  public:
+    virtual void push(char c) = 0;
+    virtual char pop() = 0;
+    virtual char multiPop() = 0;
+    virtual int getRepeatCounts() = 0;
+    virtual bool isEmpty() const = 0;
+    virtual int getSize() const = 0;
+    virtual int getUniqueCount() = 0;
+};
+
+#endif
