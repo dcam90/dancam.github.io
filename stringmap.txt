@@ -1,0 +1,119 @@
+/******************************************************************************
+Title       : daniel_cambitsis_project3_header.hpp
+Author      : Dan Cambitsis
+Created on  : 12/20/2015
+Description : Header file for daniel_cambitsis_project3_imp.cpp
+******************************************************************************/
+#ifndef _DANIEL_CAMBITSIS_PROJECT3_HEADER_HPP_
+#define _DANIEL_CAMBITSIS_PROJECT3_HEADER_HPP_
+
+#include <iostream>
+#include <string>
+#include <cassert>
+#include <stdexcept> 
+#include <cstdlib>
+#include <sstream>
+
+using namespace std;
+
+class StringMap {
+	private:
+		struct node { //structure declared for node
+			string nodeKey, nodeValue; //string values for both the key and its value
+			node* left; //points to the left of the node (less than root's key)
+			node* right; //points to the right of the node (greater than root's key)
+		};
+
+		node* root; //declare a root for the tree
+		int count = 0; //used to manage size of tree
+		void privateClear(node* thePtr);
+		/*recursive function for clear
+    	@param: node* thePtr
+    	@pre: the tree isn't empty 
+    	@post: clears the entire tree with the exception of the root
+    	no return
+    	*/
+		bool privateDeleteValue(node* &thePtr, string key);
+		/*recursive function to delete a specific node
+   		@param: node* &thePtr
+    	@pre: the tree exists and the target node can be attained
+    	@post: node is deleted and arrangements are made (i.e. if the node had children, rearrange the nodes, etc.)
+    	no return
+    	*/
+		node* privateCopy(const node* newSM);
+		/*recursive function for the assignment operator and copy constructor
+    	@param: const node* newSM 
+    	@pre: the tree to be copied exists 
+   		@post: none
+    	return copy (the copied tree)
+    	*/
+	public:
+		StringMap() : root(nullptr) { }; //default constructor, set root to the nullptr
+		StringMap(const StringMap& newSM);
+		/*copy constructor
+    	@param: const StringMap& newSM
+    	@pre: tree to be copied exists
+   		@post: root is set equal to the result of privateCopy
+    	no return
+    	*/
+		StringMap& operator=(const StringMap& newSM);
+		/*assignment operator
+    	@param: const StringMap& newSM
+    	@pre: tree to be copied exists
+   		@post: root is set equal to the result of privateCopy
+    	return *this
+    	*/
+		bool isEmpty() const;
+		/*checks to see if the tree is empty
+    	@param: none
+    	@pre: none
+   		@post: returns true if tree is empty, otherwise returns false (checks to see if root is the nullptr)
+    	return root == nullptr (either true or false)
+    	*/
+		int getSize() const;
+		/*gets the size of the tree
+    	@param: none
+    	@pre: none
+   		@post: returns the count (size) of the tree, 0 if empty
+    	return count
+    	*/
+		bool addValue(string key, string value);
+		/*adds a value to the tree
+    	@param: string key, string value
+    	@pre: both key and value are not empty strings
+   		@post: key + value are added to tree, if root: make it the root, otherwise: position depends on key's name
+    	return check (true, false if either string is empty)
+    	*/
+		void clear();
+		/*clears the tree, including the root
+    	@param: none
+    	@pre: tree exists and has nodes to be cleared
+   		@post: clears the entire tree, including the root
+    	no return
+    	*/
+		bool deleteValue(string key);
+		/*deletes a value from the tree
+    	@param: string key
+    	@pre: key is valid and tree has nodes (exists)
+   		@post: node is deleted and arrangements are made (i.e. if the node had children, rearrange the nodes, etc.)
+    	return false (unless node exists and is successfully deleted, then true)
+    	*/
+		bool contains(string key);
+		/*checks to see if the tree has the inputted key
+    	@param: string key
+    	@pre: key is valid and tree has nodes (exists)
+   		@post: returns true if the key is in the tree, otherwise false
+    	return false (default condition, we're assuming the key isn't in the tree)
+    	*/
+		string getValue(string key);
+		/*retrieves the value associated with the inputted key
+    	@param: string key
+    	@pre: key is valid, its value is valid, and the tree exists
+   		@post: the value of the inputted key is retrieved 
+    	return findValue 
+    	*/
+		~StringMap(); //destructor, calls clear
+
+};
+
+#endif 
