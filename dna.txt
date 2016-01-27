@@ -1,0 +1,63 @@
+/******************************************************************************
+Title       : dna.hpp
+Author      : Dan Cambitsis
+Created on  : 10/23/2015
+Description : Header file for DNA (extends Weighable.hpp).
+******************************************************************************/
+
+#ifndef _DNA_HPP_
+#define _DNA_HPP_
+
+#include "weighable.hpp" 
+
+class DNA: public Weighable { //extends the abstract Weighable
+  private:
+    std::string theSequence; //storing the imported sequence as a string
+    double theWeight; //the sequence's weight
+    void setWeight(std::string theSequence);
+    /*private function to set the weight of the DNA object
+    @param: string theSequence
+    @pre: theSequence exists and is initiated in the main
+    @post: sets the weight of the sequence
+    no return
+    */
+  public: 
+    DNA() : theSequence(" ") { } //default constructor, set the sequence as a blank string
+    bool isEmpty();
+    /*checks to see if the sequence is empty (used after clear())
+    @param: none
+    @pre: the sequence was previously filled
+    @post: deletes the sequence and sets the weight equal to 0
+    returns either true or false
+    */
+    void setSequence(std::string aSequence);
+    /*sets the sequence to the private member variable theSequence 
+    @param: string aSequence (from the imported file)
+    @pre: the sequence isn't blank, contains A G T C, and is uppercase (if not uppercase, setSequence will convert it)
+    @post: sets theSequence = aSequence and also calls setWeight() to set the sequence's weight
+    no return
+    */
+    double getWeight() const { return theWeight; } 
+    /*returns the weight of a DNA object
+    @param: none
+    @pre: the weight exists and is created within setSequence
+    @post: none
+    returns the sequence's weight
+    */
+    void printBrief(); 
+    /*prints the sequence
+    @param: none
+    @pre: the sequence isn't empty and is successfully created within setSequence
+    @post: prints the sequence
+    no return
+    */
+    void clear();
+    /*clears the sequence and the weight
+    @param: none
+    @pre: the sequence and its weight is filled
+    @post: sets the sequence to the empty string and sets weight to 0
+    no return
+    */
+};
+
+#endif
