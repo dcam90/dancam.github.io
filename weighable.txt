@@ -1,0 +1,16 @@
+/******************************************************************************
+Title       : weighable.hpp
+Author      : Dan Cambitsis
+Created on  : 10/23/2015
+Description : Header file for abstract Weighable.
+******************************************************************************/
+
+#ifndef _WEIGHABLE_HPP_
+#define _WEIGHABLE_HPP_
+
+class Weighable { //an abstract class to be utilized by DNA
+  private: 
+    virtual double getWeight() const { return 0; } 
+};
+
+#endif
