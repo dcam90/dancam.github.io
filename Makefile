@@ -37,21 +37,44 @@ LIBS_ALL =  -L/usr/lib -L/usr/local/lib $(MATH_LIBS)
 
 
 #ZEROTH PROGRAM
-ALL_OBJ0= TestChain.o
-PROGRAM_0=TestChain
+ALL_OBJ0=CreateAndTestHash.o 
+PROGRAM_0=CreateAndTestHash
 $(PROGRAM_0): $(ALL_OBJ0)
 	g++ $(C++FLAG) -o $(EXEC_DIR)/$@ $(ALL_OBJ0) $(INCLUDES) $(LIBS_ALL)
+
+ALL_OBJ1=TestBinomialQueue.o
+PROGRAM_1=TestBinomialQueue
+$(PROGRAM_1): $(ALL_OBJ1)
+	g++ $(C++FLAG) -o $(EXEC_DIR)/$@ $(ALL_OBJ1) $(INCLUDES) $(LIBS_ALL)
+
 
 #Compiling all
 
 all: 	
 		make $(PROGRAM_0)
+		make $(PROGRAM_1)
+
+
+run1linear: 	
+		./$(PROGRAM_0) words.txt query_words.txt linear
+
+run1quadratic: 	
+		./$(PROGRAM_0) words.txt query_words.txt quadratic
+
+run1double: 	
+		./$(PROGRAM_0) words.txt query_words.txt double
+
+run1chaining: 	
+		./$(PROGRAM_0) words.txt query_words.txt chaining
+
+
+
 
 
 #Clean obj files
 
 clean:
-	(rm -f *.o; rm -f TestChain)
+	(rm -f *.o; rm -f $(PROGRAM_0); rm -f $(PROGRAM_1))
 
 
 
